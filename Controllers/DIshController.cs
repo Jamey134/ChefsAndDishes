@@ -8,28 +8,23 @@ public class DishController : Controller
 {
     private readonly ILogger<DishController> _logger;
     // Add a private variable of type MyContext (or whatever you named your context file)
-    private readonly MyContext _context;
+    private readonly MyContext db;
     public DishController(ILogger<DishController> logger, MyContext context)
     {
         _logger = logger;
         // When our HomeController is instantiated, it will fill in _context with context
         // Remember that when context is initialized, it brings in everything we need from DbContext
         // which comes from Entity Framework Core
-        _context = context;
+        db = context;
     }
 
 
 
-[HttpGet("")]
-    public IActionResult Index()
-    {
-        List<Dish> AllDishes = _context.Dishes.OrderByDescending(d => d.CreatedAt).ToList();
-        return View("Index", AllDishes);
-    }
 
     [HttpGet("/dishes")]
     public IActionResult DisplayNewDish()
     {
+        List<Dish> AllDishes = db.Dishes.Includes(c => c.Creator) OrderByDescending(d => d.CreatedAt).ToList();
         return View("New"); //<--- HTML page to see our new, displayed dish
     }
 

@@ -4,7 +4,7 @@ using ChefsAndDishes.Models;
 using Microsoft.AspNetCore.Identity;
 //Added for session check
 using Microsoft.AspNetCore.Mvc.Filters;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace ChefsAndDishes.Controllers;
 
@@ -24,21 +24,32 @@ public class ChefController : Controller
     [HttpGet("")]
     public IActionResult Index()
     {
-
-        return View();
-
+        List<Chef> allChefs = db.Chefs.Include(ad => ad.AllDishes).ToList(); //<---- Created this to render all Chefs that include their dishes
+        return View("Index");
     }
 
-    // [HttpGet("Dashboard")]
-    // public IActionResult Dashboard()
-    // {
-    //     return View("Dashboard");
-
-    // }
-
-
-
+    [HttpGet("chefs/new")] //<--- To render AddChef.cshtml page
+    public IActionResult AddChef()
+    {
+        return View("AddChef");
     }
+
+    [HttpPost("chefs/new")] // <--- Method to add a chef to our db (CREATE)
+    public IActionResult CreateChef(Chef newChef)
+    {
+        if (ModelState.IsValid)
+        {
+            db.Add(newChef); // Adds Chef's info into DB
+            db.SaveChanges(); // Saves Chef's info in DB
+            return RedirectToAction("Index"); // Displays info onto Chef's Index page
+        }
+        else
+        {
+            return View("AddChef"); // Returns user to add chef page due to invalid validations
+        }
+    }
+
+}
 
 
 

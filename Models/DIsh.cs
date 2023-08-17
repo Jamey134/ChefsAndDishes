@@ -16,6 +16,9 @@ public class Dish
     [Required]
     [Range(1, 6, ErrorMessage = "Tastiness Rating Must Be Between 1 and 5")]
     public int Tastiness {get;set;}
+
+    [Required]
+    public string Description {get;set;}
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
     public int ChefId { get; set; } // <--- The foreign Key

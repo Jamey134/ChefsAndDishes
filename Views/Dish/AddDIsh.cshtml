@@ -15,10 +15,10 @@
                         <span class="input-group-text" for="Name">Name of Dish</span>
                         <input asp-for="Name" class="form-control" type="text" id="Name">
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="Chef">Name of Chef</span>
+                    @* <div class="input-group mb-3"> *@
+                        @* <span class="input-group-text" for="Chef">Name of Chef</span>
                         <input asp-for="Chef" class="form-control" type="text" id="Chef">
-                    </div>
+                    </div> *@
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="Calories">Calories</span>
                         <input asp-for="Calories" class="form-control" type="number" id="Calories">
@@ -38,8 +38,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="Description"> Description </span>
-                        <textarea asp-for="Description" class="form-control" id="Description" cols="20"
-                            rows="3"></textarea>
+                        <textarea asp-for="Description" class="form-control" id="Description" cols="20" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@
     </form>
     <span class="text-danger" asp-validation-for="Name"></span>
     <br>
-    <span class="text-danger" asp-validation-for="Chef"></span>
+    @* <span class="text-danger" asp-validation-for="Chef"></span> *@
     <br>
     <span class="text-danger" asp-validation-for="Calories"></span>
     <br>

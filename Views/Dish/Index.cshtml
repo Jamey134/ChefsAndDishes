@@ -15,15 +15,15 @@
         </thead>
         <tbody>
             
-                @foreach (Dish d in Model)
+                @* @foreach (Dish d in Model)
                 {
                     <tr>
                     <td>@d.Name</td>
-                    <td>@d.Chef.FirstName @d.Chef.LastName</td>
+                    <td>@d.Creator.FirstName @d.Creator.LastName</td>
                     <td>@d.Tastiness</td>
                     <td>@d.Calories</td>
                     </tr>
-                }
+                } *@
             
         </tbody>
     </table>
