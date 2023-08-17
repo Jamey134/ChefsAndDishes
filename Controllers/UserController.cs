@@ -39,15 +39,15 @@ public class UserController : Controller
     //-----REGISTER-----
     [HttpPost("/register")]
 
-    public IActionResult Register(User newUser)
+    public IActionResult Register(Chef newChef)
     {
         if (!ModelState.IsValid)
         {
             return View("Index");
         }
-        PasswordHasher<User> hasher = new PasswordHasher<User>();
+        // PasswordHasher<User> hasher = new PasswordHasher<User>();
 
-        newUser.Password = hasher.HashPassword(newUser, newUser.Password);
+        // newUser.Password = hasher.HashPassword(newUser, newUser.Password);
 
         db.Users.Add(newUser);
         db.SaveChanges();
