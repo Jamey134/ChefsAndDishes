@@ -18,7 +18,7 @@ public class Chef
     public string LastName { get; set; }         
     
     [Required]
-    [MinimumDOB(18)]
+    // [MinimumDOB(18)]
     
     public DateTime DateOfBirth { get; set; }          
     
@@ -27,19 +27,19 @@ public class Chef
     public List<Dish> AllDishes { get; set; } = new List<Dish>();
 }
 
-public class MinimumDOBAttribute : ValidationAttribute
-{
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    {
-        DateTime Now = DateTime.Now;
-        DateTime Input = (DateTime)value;
+// public class MinimumDOBAttribute : ValidationAttribute
+// {
+//     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+//     {
+//         DateTime Now = DateTime.Now;
+//         DateTime Input = (DateTime)value;
 
 
-        if (Input > Now)
-        {
-            return new ValidationResult("Date of Birth must be in the past.");
-        } else {
-            return ValidationResult.Success;
-        }
-    }
-}
+//         if (Input > Now)
+//         {
+//             return new ValidationResult("Date of Birth must be in the past.");
+//         } else {
+//             return ValidationResult.Success;
+//         }
+//     }
+// }
