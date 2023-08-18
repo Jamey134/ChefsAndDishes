@@ -7,7 +7,7 @@
         <h1>Add a New Dish</h1>
         <hr>
     </div>
-    <form asp-action="Create" asp-controller="Home" method="post" class="w-75 mx-auto">
+    <form asp-action="Create" asp-controller="Dish" method="post" class="w-75 mx-auto">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -22,6 +22,15 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="Calories">Calories</span>
                         <input asp-for="Calories" class="form-control" type="number" id="Calories">
+                    </div>
+                        <div class="input-group mb-3">
+                            <span class = "input-group-text" for="Chefs">Chefs:</span>
+                            <select asp-for="ChefId"> @* Add foreign key into asp-for when forming a one-to-many relationship*@
+                                @foreach(Chef n in ViewBag.AllChefs)
+                                {
+                                <option value = "@n.ChefId">@n.FirstName @n.LastName</option>
+                                }
+                            </select>
                     </div>
                 </div>
                 <div class="col">

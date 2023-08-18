@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ChefsAndDishes.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChefsAndDishes.Controllers;
 
@@ -22,10 +23,10 @@ public class DishController : Controller
 
 
     [HttpGet("/dishes")]
-    public IActionResult DisplayNewDish()
+    public IActionResult DisplayDishes()
     {
-        List<Dish> AllDishes = db.Dishes.Includes(c => c.Creator) OrderByDescending(d => d.CreatedAt).ToList();
-        return View("New"); //<--- HTML page to see our new, displayed dish
+        List<Dish> AllDishes = db.Dishes.Include(c => c.Creator).OrderByDescending(d => d.CreatedAt).ToList();
+        return View("Index", AllDishes); //<--- HTML page to see our new, displayed dish
     }
 
     [HttpPost("dishes/new")] //<---- Create a new dish to input into db
@@ -33,23 +34,31 @@ public class DishController : Controller
     {
         if (ModelState.IsValid) //<--- validation 
         {
-            _context.Add(newDish);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            db.Add(newDish);
+            db.SaveChanges();
+            return RedirectToAction("DisplayDishes");
         }
         else
         {
             // call the method to render the new page
-            return DisplayNewDish();
+            return View("AddDish");
         }
     }
 
-    [HttpGet("Dishes/{id}")] //<--- Read added dishes from db
-    public IActionResult Read(int id)
+    [HttpGet("dishes/create")]
+    public IActionResult AddDish()
     {
-        Dish? OneDish = _context.Dishes.FirstOrDefault(d => d.DishId == id);
-        return View("Read", OneDish);
+        List<Chef> AllChefs = db.Chefs.ToList();
+        ViewBag.AllChefs = AllChefs;
+        return View();
     }
+
+    // [HttpGet("Dishes/{id}")] //<--- Read added dishes from db
+    // public IActionResult Read(int id)
+    // {
+    //     Dish? OneDish = db.Dishes.FirstOrDefault(d => d.DishId == id);
+    //     return View("Read", OneDish);
+    // }
 
 
     

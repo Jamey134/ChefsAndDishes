@@ -2,7 +2,7 @@
 
 @model List<Dish>
 
-<h2>Yum! Check Out Our Tasty Dishes.</h2>
+<h2 class="text-center">Yum! Check Out Our Tasty Dishes.</h2>
 <hr>
     <table class="table table-striped align-items-center">
         <thead>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             
-                @* @foreach (Dish d in Model)
+                @foreach (Dish d in Model)
                 {
                     <tr>
                     <td>@d.Name</td>
@@ -23,7 +23,7 @@
                     <td>@d.Tastiness</td>
                     <td>@d.Calories</td>
                     </tr>
-                } *@
+                }
             
         </tbody>
     </table>

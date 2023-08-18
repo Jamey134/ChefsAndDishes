@@ -25,7 +25,8 @@ public class ChefController : Controller
     public IActionResult Index()
     {
         List<Chef> allChefs = db.Chefs.Include(ad => ad.AllDishes).ToList(); //<---- Created this to render all Chefs that include their dishes
-        return View("Index");
+        Console.WriteLine("---------------------->" + allChefs);
+        return View("Index", allChefs);
     }
 
     [HttpGet("chefs/new")] //<--- To render AddChef.cshtml page
@@ -34,7 +35,7 @@ public class ChefController : Controller
         return View("AddChef");
     }
 
-    [HttpPost("chefs/new")] // <--- Method to add a chef to our db (CREATE)
+    [HttpPost("chefs/create")] // <--- Method to add a chef to our db (CREATE)
     public IActionResult CreateChef(Chef newChef)
     {
         if (ModelState.IsValid)
@@ -45,6 +46,7 @@ public class ChefController : Controller
         }
         else
         {
+
             return View("AddChef"); // Returns user to add chef page due to invalid validations
         }
     }
