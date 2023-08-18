@@ -20,8 +20,6 @@ public class DishController : Controller
     }
 
 
-
-
     [HttpGet("/dishes")]
     public IActionResult DisplayDishes()
     {
@@ -40,6 +38,8 @@ public class DishController : Controller
         }
         else
         {
+            List<Chef> AllChefs = db.Chefs.ToList();
+            ViewBag.AllChefs = AllChefs;
             // call the method to render the new page
             return View("AddDish");
         }
@@ -61,7 +61,7 @@ public class DishController : Controller
     // }
 
 
-    
+
     public IActionResult Privacy()
     {
         return View();
